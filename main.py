@@ -1,27 +1,23 @@
-"""One Line, One Laugh: Roast Your Fridge — writes the entry to /output/entry.txt.
+#!/usr/bin/env python3
+"""Roast Your Fridge — one-line entry.
 
-Why this line: a roast of my own fridge built on one concrete,
-mockable detail (a single yogurt and a mystery Tupperware) instead of
-generic "you're cold" jokes. The punch lands on the very last words
-("too scared to open"), it reads aloud naturally, and the fridge
-working all night to guard almost nothing is the twist.
+Prints the one-line roast exactly as stored in entry.txt.
 """
 
-import os
+LINE = "My fridge runs all night just to guard one yogurt and a Tupperware I'm too scared to open."
 
-# The entry itself: one line, the punch is the last phrase.
-ENTRY = "My fridge runs all night just to guard one yogurt and a Tupperware I'm too scared to open."
 
-OUTPUT_PATH = "/output/entry.txt"
+def validate():
+    """Check the roast is a single line of exactly 90 characters."""
+    assert LINE.count("\n") == 0, "roast must be a single line"
+    assert len(LINE) == 90, f"expected 90 chars, got {len(LINE)}"
+    assert LINE.startswith("My fridge"), "roast must start with 'My fridge'"
+    return True
 
 
 def main():
-    # Guard: never submit a blank entry to the sealed gate.
-    assert ENTRY and not ENTRY.isspace(), "entry must not be empty"
-    os.makedirs("/output", exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(ENTRY)
-    print("wrote", OUTPUT_PATH, len(ENTRY), "chars")
+    validate()
+    print(LINE)
 
 
 if __name__ == "__main__":
